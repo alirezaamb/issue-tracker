@@ -25,6 +25,20 @@ const NewIssuePage = () => {
   } = useForm<IssueForm>({
     resolver: zodResolver(createIssueSchema),
   });
+
+  const onSubmit = () => {
+    handleSubmit(async (data) => {
+      try {
+        setIsSubmmiting(true);
+        await axios.post('/api/issues', data);
+        router.push('/issues');
+      } catch (error) {
+        setIsSubmmiting(false);
+
+        setError('an unexpected error occured');
+      }
+    });
+  };
   return (
     <div className="max-w-xl">
       {error && (
@@ -32,20 +46,7 @@ const NewIssuePage = () => {
           {error}
         </Callout.Root>
       )}
-      <form
-        className=" space-y-3"
-        onSubmit={handleSubmit(async (data) => {
-          try {
-            setIsSubmmiting(true);
-            await axios.post('/api/issues', data);
-            router.push('/issues');
-          } catch (error) {
-            setIsSubmmiting(false);
-
-            setError('an unexpected error occured');
-          }
-        })}
-      >
+      <form className=" space-y-3" onSubmit={onSubmit}>
         <TextField.Root placeholder="Title" {...register('title')} />
         <ErrorMessage>{errors.title?.message}</ErrorMessage>
         <Controller
