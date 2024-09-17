@@ -2,7 +2,7 @@
 import { ErrorMessage } from '@/app/components/ErrorMessage';
 import { createIssueSchema } from '@/app/ValidationSchemas';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Callout, Spinner, TextField } from '@radix-ui/themes';
+import { Box, Button, Callout, Spinner, TextField } from '@radix-ui/themes';
 import axios from 'axios';
 import 'easymde/dist/easymde.min.css';
 import { useRouter } from 'next/navigation';
@@ -40,7 +40,7 @@ const NewIssuePage = () => {
     });
   };
   return (
-    <div className="max-w-xl">
+    <Box className="max-w-xl">
       {error && (
         <Callout.Root className="mb-5" color="red">
           {error}
@@ -61,7 +61,7 @@ const NewIssuePage = () => {
           Submit new Issue {isSubmmiting && <Spinner />}
         </Button>
       </form>
-    </div>
+    </Box>
   );
 };
 
