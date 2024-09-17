@@ -14,7 +14,6 @@ const IssueDetailPage = async ({ params }: Props) => {
     where: { id: +params.id },
   });
   if (!issue) notFound();
-  await delay(2000);
   return (
     <div>
       <Heading>{issue.title}</Heading>
