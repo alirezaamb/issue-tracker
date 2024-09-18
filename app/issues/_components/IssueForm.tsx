@@ -48,6 +48,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
       }
 
       router.push('/issues');
+      router.refresh();
     } catch (err) {
       setIsSubmitting(false);
 
